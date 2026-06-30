@@ -5,25 +5,22 @@ class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) 
     {
-        vector<int> res;
         int len = nums.size();
+        vector<int> ans;
 
-        unordered_map<int,int> mp;
-        for(int i=0; i<len; i++)
+        unordered_set<int> s;
+        for(int i = 0; i < len; i++)
         {
-            mp[nums[i]] = 1;
+            s.insert(nums[i]);
         }
 
-        for(int i=1; i<=len; i++)
+        for(int i = 1; i <= len; i++)
         {
-            auto it = mp.find(i);
-            if(it == mp.end())  // 没找到，说明缺失
+            if(s.find(i) == s.end())
             {
-                res.push_back(i);
+                ans.push_back(i);
             }
         }
-
-        return res;
-        
+        return ans;
     }
 };
