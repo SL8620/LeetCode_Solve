@@ -50,7 +50,59 @@ using namespace std;
 
 class Solution {
 public:
-    string reverseWords(string s) {
-        
+    string reverseWords(string s) 
+    {
+        stack<string> str_st;
+        string ans = "";
+        int len = s.length();
+        int st=0;
+        int ed=0;
+        int find_word=0;
+        for(int i = 0; i < len; i++)
+        {
+            char ch = s[i];
+            if(ch != ' ')
+            {
+                if(find_word == 0)
+                {
+                    st = i;
+                    find_word = 1;
+                }
+                ed = i;
+
+                if(i == len-1)
+                {
+                    string word = s.substr(st, ed-st+1);
+                    st = 0;
+                    ed = 0;
+                    find_word = 0;
+                    str_st.push(word);
+                }
+            }
+            else
+            {
+                if(find_word == 1)
+                {
+                    string word = s.substr(st, ed-st+1);
+                    st = 0;
+                    ed = 0;
+                    find_word = 0;
+                    str_st.push(word);
+                    str_st.push(" ");
+                }
+            }
+        }
+
+        if(str_st.top() == " ")
+        {
+            str_st.pop();
+        }
+
+        while(!str_st.empty())
+        {
+            ans += str_st.top();
+            str_st.pop();
+        }
+        return ans;
     }
 };
