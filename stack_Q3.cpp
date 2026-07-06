@@ -62,8 +62,37 @@ class Solution {
 public:
     vector<int> exclusiveTime(int n, vector<string>& logs) 
     {
-        vector<int> result(n, 0);
-        
+        vector<int> res(n, 0);
+        stack<pair<int, int>> st; // {function_id, start_time}
+        for (auto& log : logs) 
+        {
+            int pos1 = log.find(':');
+            int pos2 = log.rfind(':');
+
+            int id = stoi(log.substr(0, pos1));                     // task的id
+            string type = log.substr(pos1 + 1, pos2 - pos1 - 1);    // task开始还是结束
+            int time = stoi(log.substr(pos2 + 1));                  // task的时间戳
+
+            if (type == "start")    // start就入栈
+            {
+                if (!st.empty()) 
+                {
+                    res[st.top().first] += time - st.top().second;
+                }
+                st.push({id, time});
+            } 
+            else 
+            {
+                auto [prev_id, prev_time] = st.top();
+                st.pop();
+                res[prev_id] += time - prev_time + 1;
+                if (!st.empty()) 
+                {
+                    st.top().second = time + 1;
+                }
+            }
+        }
+        return res;
         
     }
 };
