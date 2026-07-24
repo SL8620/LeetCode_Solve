@@ -23,3 +23,31 @@ premium lock icon
 -231 <= nums[i] <= 231 - 1
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) 
+    {
+        int len = nums.size();
+        if(len == 0 || len == 1)
+        {
+            return;
+        }
+
+        // 双指针法
+        int left = 0;
+        for(int right = 0; right < len; right++)
+        {
+            if(nums[right] != 0)
+            {
+                swap(nums[left], nums[right]);
+                left++; 
+            }
+        }   
+
+        
+    }
+};
