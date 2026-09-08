@@ -32,7 +32,23 @@ class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) 
     {
+        if(amount==0)
+        {
+            return 0;
+        }
         
-        
+        int coin_cnt = coins.size();
+        vector<int> dp(amount+1, INT_MAX-1);
+        dp[0] = 0;
+        for(int i=0; i<coin_cnt; i++)
+        {
+            int coin_val = coins[i];
+            for(int j=coin_val; j<=amount; j++)
+            {
+                dp[j] = min(dp[j], dp[j-coin_val]+1);
+            }
+        }
+
+        return dp[amount]==INT_MAX-1 ? -1 : dp[amount];
     }
 };
