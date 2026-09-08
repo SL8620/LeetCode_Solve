@@ -17,7 +17,7 @@
 解释：13 = 4 + 9
 
 1  2  3  4  5  6  7  8  9  10  11  12
-1  2  3  1  2  3  4  5  1  2    
+1  2  3  1  2  3  4  2  1   2   3   4 
 提示：
     1 <= n <= 104
 */
@@ -29,9 +29,18 @@ class Solution {
 public:
     int numSquares(int n) 
     {
-        vector<int> dp(n+1, 0);
+        vector<int> dp(n+1, INT_MAX);
         dp[0] = 0;
         dp[1] = 1;
-        for(int i=1; i<=n; i++)
+        for(int i=2; i<=n; i++)
+        {
+            for(int j=1; j*j<i; j++)
+            {
+                int diff = i-j*j;
+                dp[i] = min(dp[i], dp[diff]+1);
+            }
+        }
+
+        return dp[n];
     }
 };
