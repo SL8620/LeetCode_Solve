@@ -29,17 +29,19 @@ public:
     int maxProduct(vector<int>& nums) 
     {
         int len = nums.size();
-        vector<int> dpMin(len, 0);
-        dpMax[0] = nums[0];
-        dpMin[0] = nums[0];
-        int res = nums[0];
+        vector<int> dp(len, INT_MIN);
+        dp = nums;
+        int ans = dp[0];
+
         for(int i=1; i<len; i++)
-        {   
-            dpMax[i] = max({nums[i], dpMax[i-1]*nums[i], dpMin[i-1]*nums[i]});
-            dpMin[i] = min({nums[i], dpMax[i-1]*nums[i], dpMin[i-1]*nums[i]});
-            res = max(res, dpMax[i]);
+        {
+            for(int j=i-1; j>=0; j--)
+            {
+                dp[i] = max(dp[i], )
+            }
         }
-        return res;
-        
+
+        return ans;
+
     }
 };
