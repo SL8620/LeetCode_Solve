@@ -39,6 +39,23 @@ public:
         int len = prices.size();
         int ans = 0;
         
+        vector<int> dp(len, 0);
+        dp[0] = 0;
+        for(int i = 1; i < len; i++)
+        {
+            if(prices[i] <= prices[i-1])
+            {
+                dp[i] = dp[i-1];
+            }
+            else
+            {
+                for(int j=0; j<i; j++)
+                {
+                    dp[i] = max(dp[i], dp[j] + prices[i] - prices[j]);
+                }
+            }
+        }
+        return dp[len-1];
         
     }
 };

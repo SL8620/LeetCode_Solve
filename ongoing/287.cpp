@@ -24,8 +24,28 @@ using namespace std;
 
 class Solution {
 public:
-    int findDuplicate(vector<int>& nums) 
+    int singleNumber(vector<int>& nums) 
     {
-        
+        int len = nums.size();
+        if(len<=1)
+        {
+            return nums[0];
+        }
+
+        unordered_map<int, int> map;
+        for(int i=0; i<nums.size(); i++)
+        {
+            map[nums[i]]++;
+            if
+        }
+
+        for(auto it = map.begin(); it != map.end(); it++)
+        {
+            if(it->second > 1)
+            {
+                return it->first;
+            }
+        }
+        return -1;
     }
-};
+}
